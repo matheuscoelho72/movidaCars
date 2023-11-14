@@ -1,6 +1,7 @@
 package com.example.movidaCars.controller;
 
-import com.example.movidaCars.model.Cliente;
+import ch.qos.logback.core.net.server.Client;
+import com.example.movidaCars.model.ClienteModel;
 import com.example.movidaCars.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,14 +15,27 @@ public class ClienteController {
     @Autowired
     private ClienteRepository clienteRepository;
 
+    //Buscar
     @GetMapping
-    public List<Cliente> listar(){
+    public List<ClienteModel> listar(){
         return clienteRepository.findAll();
     }
-    @PostMapping
-    public Cliente adicionarCliente(@RequestBody Cliente cliente){
 
-        return clienteRepository.save(cliente);
+    //Salvar
+    @PostMapping
+    public ClienteModel adicionarCliente(@RequestBody ClienteModel clienteModel){
+
+        return clienteRepository.save(clienteModel);
 
     }
+
+    //Remover
+    @RequestMapping(value = "/deleteById", method = RequestMethod.DELETE, params = "id")
+    public void removerClienteById(@RequestBody Long id){
+
+        clienteRepository.deleteById(id);
+
+    }
+
+    //Atualizar
 }

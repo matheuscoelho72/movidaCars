@@ -3,10 +3,11 @@ package com.example.movidaCars.model;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Cliente {
+public class ClienteModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +26,8 @@ public class Cliente {
     private String password;
     @Column (nullable = true)
     private String phone;
+
+    public List<CarroModel> carros;
 
 
     public void setId(Long id) {
@@ -96,8 +99,8 @@ public class Cliente {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Cliente cliente = (Cliente) o;
-        return Objects.equals(getId(), cliente.getId());
+        ClienteModel clienteModel = (ClienteModel) o;
+        return Objects.equals(getId(), clienteModel.getId());
     }
 
     @Override
