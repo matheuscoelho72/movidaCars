@@ -21,7 +21,7 @@ public class UsersController {
     }
 
     @PostMapping
-    public UsersModel adicionarCliente(@RequestBody UsersModel usersModel){
+    public UsersModel adicionarUsuario(@RequestBody UsersModel usersModel){
 
         return usersRepository.save(usersModel);
 
@@ -31,6 +31,19 @@ public class UsersController {
     public Optional<UsersModel> listarPorId(Integer id){
 
        return usersRepository.findById(id);
+
+    }
+    @DeleteMapping(value = "/deleteById", params = "id")
+    public void removerUsuarioPorId(Integer id){
+
+        usersRepository.deleteById(id);
+
+    }
+
+    @RequestMapping(value = "/id", method = RequestMethod.GET, params = "id")
+    public UsersModel atualizarUsuario(@RequestBody UsersModel usersModel){
+
+        return usersModel;
 
     }
 
